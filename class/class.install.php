@@ -1,7 +1,7 @@
 <?php
 
 /*
-Title: Apinstall 0.0.3
+Title: Apinstall 0.0.3a
 Author: Pawel 'Pavlus' Janisio
 Source: http://code.google.com/p/apinstall/
 License: GPLv3
@@ -46,14 +46,8 @@ public function includeCss()
 public function setLogPath($path)
 	{
 	$this->path = $path;
-	if(is_writable($this->path)){
+	
 		return $this->path;
-	}
-		else
-		{
-			echo 'Directory is not wirtable!';
-			exit();
-		}
 
 	}
 
