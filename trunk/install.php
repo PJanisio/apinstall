@@ -15,8 +15,8 @@ $install = new Installer();
 
 
 $install->setLogPath('l.log');
-$install->setSteps(6);
-$install->generate('#35464D');
+$install->setSteps(11);
+$install->generate('#84AEBE');
 
 
 
@@ -24,27 +24,48 @@ $install->generate('#35464D');
 echo '<div id="apinstall"></div>';
 
 
-$output = 'Starting nuclear reactions...';
-$install->save($output);
-$install->delay(1);
-
-$output = 'Clearing cached data';
+$output = 'Opening connection';
 $install->save($output);
 $install->delay(2);
 
-$output = 'Polishing';
+$output = '1 socket found';
 $install->save($output);
-$install ->delay(0.5);
+$install->delay(0.5);
 
-$output = 'Making blowjob';
+$output = '2 socket found';
+$install->save($output);
+$install->delay(0.5);
+
+$output = '3 socket found';
+$install->save($output);
+$install->delay(0.5);
+
+$output = '4 socket found';
+$install->save($output);
+$install->delay(0.5);
+
+$output = '5 socket found';
+$install->save($output);
+$install->delay(0.5);
+
+
+$output = 'Injecting source code';
+$install->save($output);
+$install ->delay(3);
+
+$output = 'Closing connections';
+$install->save($output);
+$install ->delay(1);
+
+$output = 'Cleaning temp files';
 $install->save($output);
 $install ->delay(2);
 
-$output = 'Farting loudly';
+$output = 'Escaping from wife ;)';
 $install->save($output);
-$install ->delay(2);
+$install ->delay(1);
 
-$output = 'Done';
+$output = 'Finished.';
 $install->save($output);
 $install ->delay(5);
 
