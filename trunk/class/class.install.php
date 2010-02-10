@@ -13,7 +13,7 @@ public $steps = 0;
 public $logData;
 public $path;
 
-public function __construct($jquery = NULL, $css = NULL)
+public function __construct($jquery = NULL)
 	{
 
 		 set_time_limit(0); //we need to do this in case of windows users and usleep function
