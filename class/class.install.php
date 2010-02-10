@@ -62,8 +62,12 @@ public function setSteps($count)
 		return $this->steps;
 	}
 
-	public function generatePrint()
+	public function generate($colour = NULL)
 	{
+
+		if(isset($colour))
+			$this->colour = $colour;
+				else $this->colour = '#84AEBE'; 
 	
 	
 	$fp = fopen('print.php', "a+"); 
@@ -73,10 +77,10 @@ public function setSteps($count)
 $steps = '.$this->steps.';
 $lines = count(file("'.$this->path.'"));
 
-$width = round(($lines/'.$this->steps.')*100,2);
+$width = round(($lines/'.$this->steps.')*100,1);
 ?>
 <div class="meter-wrap">
-    <div class="meter-value" style="background-color: #0a0; width: <?php echo $width; ?>%;">
+    <div class="meter-value" style="background-color: '.$this->colour.'; width: <?php echo $width; ?>%;">
         <div class="meter-text">
 		<?php echo $width; ?> %
         </div>
