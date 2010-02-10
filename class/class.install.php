@@ -1,8 +1,9 @@
 <?php
 
 /*
-Title: Apinstall 0.0.2
+Title: Apinstall 0.0.3
 Author: Pawel 'Pavlus' Janisio
+Source: http://code.google.com/p/apinstall/
 License: GPLv3
 */
 
@@ -12,8 +13,10 @@ public $steps = 0;
 public $logData;
 public $path;
 
-public function __construct($jquery = NULL)
+public function __construct($jquery = NULL, $css = NULL)
 	{
+
+		 set_time_limit(0); //we need to do this in case of windows users and usleep function
 		
 		if(!isset($jquery)){
 		//include google jQuery libraries
@@ -24,6 +27,7 @@ public function __construct($jquery = NULL)
 			//echo 'Warning: jQuery libraries are not included!';
 		}
 
+
 		//include javascript
 		echo "<script type='text/javascript'>
 		var refreshId = setInterval(function()
@@ -32,14 +36,24 @@ public function __construct($jquery = NULL)
 }, 10);
 </script>";
 
+	}
 
-
+public function includeCss()
+	{
+	echo '<link href="bar.css" rel="stylesheet" type="text/css" />';
 	}
 
 public function setLogPath($path)
 	{
 	$this->path = $path;
-	return $this->path;
+	if(is_writable($this->path)){
+		return $this->path;
+	}
+		else
+		{
+			echo 'Directory is not wirtable!';
+			exit();
+		}
 
 	}
 
@@ -130,7 +144,7 @@ $this->steps++;
 
 	public function clearTemp()
 	{
-
+		//we neeed to clear temporary files made by our script
 	file_put_contents($this->path, '');
 	file_put_contents('print.php', '');
 
