@@ -35,7 +35,7 @@ public function __construct($jquery = NULL)
 		var refreshId = setInterval(function()
 {
      $('#apinstall').load('print.php');
-}, 20);
+}, 200);
 </script>";
 
 
