@@ -12,6 +12,12 @@ public function setLogPath($path)
 
 	}
 
+public function setSteps($count)
+	{
+	$this->steps = $count;
+	return $this->steps;
+	}
+
 public function save($output)
 	{
 $this->logData = $output;
