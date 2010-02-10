@@ -12,6 +12,30 @@ public $steps = 0;
 public $logData;
 public $path;
 
+public function __construct($jquery = NULL)
+	{
+		
+		if(!isset($jquery)){
+		//include google jQuery libraries
+		echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>';
+		}
+		else
+		{
+			//echo 'Warning: jQuery libraries are not included!';
+		}
+
+		//include javascript
+		echo "<script type='text/javascript'>
+		var refreshId = setInterval(function()
+{
+     $('#apinstall').load('print.php');
+}, 10);
+</script>";
+
+
+
+	}
+
 public function setLogPath($path)
 	{
 	$this->path = $path;
@@ -32,7 +56,7 @@ public function setSteps($count)
 	return $this->steps;
 	}
 
-	public function stepsNum()
+	public function showSteps()
 	{
 
 		return $this->steps;
@@ -49,15 +73,12 @@ public function setSteps($count)
 $steps = '.$this->steps.';
 $lines = count(file("'.$this->path.'"));
 
-$width = ($lines/'.$this->steps.')*100;
-
-
+$width = round(($lines/'.$this->steps.')*100,2);
 ?>
-
 <div class="meter-wrap">
     <div class="meter-value" style="background-color: #0a0; width: <?php echo $width; ?>%;">
         <div class="meter-text">
-		<?php echo $lines."/";?>'.$this->steps.'
+		<?php echo $width; ?> %
         </div>
     </div>
 </div><br>
@@ -65,7 +86,6 @@ $width = ($lines/'.$this->steps.')*100;
 
 $f = file("'.$this->path.'");
 echo $f[$lines - 1];
-
 
 ?>';
 
@@ -75,10 +95,15 @@ echo $f[$lines - 1];
 
 	}
 
-public function sleepThicks($sec)
+public function delay($sec)
 	{
-	$this->sleepTime = $sec;
-	return sleep($this->sleepTime);
+	$this->sleepTime = abs($sec);
+
+	
+    if ($this->sleepTime < 1)
+       return usleep($this->sleepTime*1000000); 
+    else
+       return sleep($this->sleepTime);
 	}
 
 
@@ -94,7 +119,7 @@ $this->steps++;
 
 	}
 
-	public function clearFiles()
+	public function clearTemp()
 	{
 
 	file_put_contents($this->path, '');
