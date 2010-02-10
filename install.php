@@ -4,6 +4,7 @@
 </head>
 <title>APINSTALL</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="bar.css" rel="stylesheet" type="text/css" />
 <body>
 <script type="text/javascript">
 var refreshId = setInterval(function()
@@ -17,7 +18,12 @@ var refreshId = setInterval(function()
 require_once('class/class.install.php');
 $install = new Installer;
 
+global $install;
+
 $install->setLogPath('l.log');
+$install->setSteps(4);
+
+
 
 
 echo '<div id="install"></div>';
@@ -34,6 +40,10 @@ $install->save($output);
 $install ->sleepThicks(4);
 $output = 'Done';
 $install->save($output);
+
+$install->clearFile();
+
+
 
 
 ?>
