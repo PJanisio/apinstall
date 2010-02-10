@@ -1,15 +1,16 @@
 <?php
 
 /*
-Title: Apinstall 0.0.1
+Title: Apinstall 0.0.2
 Author: Pawel 'Pavlus' Janisio
 License: GPLv3
 */
 
 class Installer
 {
-private $steps = 0;
+public $steps = 0;
 public $logData;
+public $path;
 
 public function setLogPath($path)
 	{
@@ -37,6 +38,43 @@ public function setSteps($count)
 		return $this->steps;
 	}
 
+	public function generatePrint()
+	{
+	
+	
+	$fp = fopen('print.php', "a+"); 
+	$data = '<?php
+
+
+$steps = '.$this->steps.';
+$lines = count(file("'.$this->path.'"));
+
+$width = ($lines/'.$this->steps.')*100;
+
+
+?>
+
+<div class="meter-wrap">
+    <div class="meter-value" style="background-color: #0a0; width: <?php echo $width; ?>%;">
+        <div class="meter-text">
+		<?php echo $lines."/";?>'.$this->steps.'
+        </div>
+    </div>
+</div><br>
+<?php
+
+$f = file("'.$this->path.'");
+echo $f[$lines - 1];
+
+
+?>';
+
+	$fw = fwrite($fp, $data);  //save
+	fclose($fp);
+
+
+	}
+
 public function sleepThicks($sec)
 	{
 	$this->sleepTime = $sec;
@@ -56,10 +94,11 @@ $this->steps++;
 
 	}
 
-	public function clearFile()
+	public function clearFiles()
 	{
 
 	file_put_contents($this->path, '');
+	file_put_contents('print.php', '');
 
 	}
 

@@ -9,7 +9,7 @@
 <script type="text/javascript">
 var refreshId = setInterval(function()
 {
-     $('#install').load('logprint.php');
+     $('#install').load('print.php');
 }, 500);
 </script>
 
@@ -22,6 +22,7 @@ global $install;
 
 $install->setLogPath('l.log');
 $install->setSteps(4);
+$install->generatePrint(4);
 
 
 
@@ -41,7 +42,7 @@ $install ->sleepThicks(4);
 $output = 'Done';
 $install->save($output);
 
-$install->clearFile();
+$install->clearFiles();
 
 
 
