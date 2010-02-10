@@ -1,7 +1,7 @@
 <?php
 
 /*
-Title: Apinstall 0.0.3a
+Title: Apinstall 0.0.4
 Author: Pawel 'Pavlus' Janisio
 Source: http://code.google.com/p/apinstall/
 License: GPLv3
@@ -12,15 +12,17 @@ class Installer
 public $steps = 0;
 public $logData;
 public $path;
+public $logFileName;
 
 public function __construct($jquery = NULL)
 	{
 
 		 set_time_limit(0); //we need to do this in case of windows users and usleep function
 		
+		
 		if(!isset($jquery)){
 		//include google jQuery libraries
-		echo '<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>';
+		echo '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>';
 		}
 		else
 		{
@@ -33,8 +35,10 @@ public function __construct($jquery = NULL)
 		var refreshId = setInterval(function()
 {
      $('#apinstall').load('print.php');
-}, 10);
+}, 20);
 </script>";
+
+
 
 	}
 
@@ -45,9 +49,10 @@ public function includeCss()
 
 public function setLogPath($path)
 	{
-	$this->path = $path;
+	$this->path = $path.'/'.$this->logFileName = sha1(date('Bs')).'.log';
 	
 		return $this->path;
+
 
 	}
 
@@ -76,6 +81,7 @@ public function setSteps($count)
 		if(isset($colour))
 			$this->colour = $colour;
 				else $this->colour = '#84AEBE'; 
+
 	
 	
 	$fp = fopen('print.php', "a+"); 
@@ -116,11 +122,11 @@ public function delay($sec)
 	{
 	$this->sleepTime = abs($sec);
 
-	
     if ($this->sleepTime < 1)
        return usleep($this->sleepTime*1000000); 
     else
        return sleep($this->sleepTime);
+
 	}
 
 
@@ -139,7 +145,7 @@ $this->steps++;
 	public function clearTemp()
 	{
 		//we neeed to clear temporary files made by our script
-	file_put_contents($this->path, '');
+	file_put_contents($this->path, ''); //or delete?
 	file_put_contents('print.php', '');
 
 	}
