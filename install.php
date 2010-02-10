@@ -1,10 +1,14 @@
 <html>
-<script src="jq141.js"></script>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+</head>
+<title>APINSTALL</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <body>
 <script type="text/javascript">
 var refreshId = setInterval(function()
 {
-     $('#install_log').load('logprint.php');
+     $('#install').load('logprint.php');
 }, 500);
 </script>
 
@@ -16,22 +20,20 @@ $install = new Installer;
 $install->setLogPath('l.log');
 
 
-echo '<div id="install_log"></div>';
+echo '<div id="install"></div>';
 
 
 $output = 'Starting nuclear reactions...';
 $install->save($output);
-sleep(2);
+$install->sleepThicks(1);
 $output = 'Clearing cached data';
 $install->save($output);
-sleep(1);
+$install->sleepThicks(2);
 $output = 'Finishing';
 $install->save($output);
-sleep(4);
+$install ->sleepThicks(4);
 $output = 'Done';
 $install->save($output);
-
-
 
 
 ?>

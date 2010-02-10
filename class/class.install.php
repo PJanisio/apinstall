@@ -1,5 +1,11 @@
 <?php
 
+/*
+Title: Apinstall 0.0.1
+Author: Pawel 'Pavlus' Janisio
+License: GPLv3
+*/
+
 class Installer
 {
 private $steps = 0;
@@ -16,6 +22,12 @@ public function setSteps($count)
 	{
 	$this->steps = $count;
 	return $this->steps;
+	}
+
+public function sleepThicks($sec)
+	{
+	this->sleepTime = $sec;
+	return sleep($this->sleepTime);
 	}
 
 public function save($output)
