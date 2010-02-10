@@ -10,12 +10,13 @@
 <?php
 
 require_once('class/class.install.php');
+
 $install = new Installer();
 
 
 $install->setLogPath('l.log');
 $install->setSteps(6);
-$install->generatePrint();
+$install->generate('#35464D');
 
 
 
