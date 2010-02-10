@@ -23,7 +23,7 @@ $install = new Installer();
 
 $install->includeCSS();
 $install->setLogPath('raport.log');
-$install->setSteps(11);
+$install->setSteps(12);
 $install->generate('#84AEBE');
 
 
@@ -31,48 +31,51 @@ $install->generate('#84AEBE');
 echo '<div id="apinstall"></div>';
 
 
-$output = 'Opening connection';
+$output = 'Submiting form';
 $install->save($output);
 $install->delay(2);
 
-$output = '1 socket found';
+$output = 'Including Apinstall class';
 $install->save($output);
 $install->delay(0.20);
 
-$output = '2 socket found';
+$output = 'Initializing Apinstall class';
+$install->save($output);
+$install->delay(0.5);
+
+$output = 'Including CSS stylesheet';
 $install->save($output);
 $install->delay(0.20);
 
-$output = '3 socket found';
+$output = 'Including jQuery javascript';
 $install->save($output);
 $install->delay(0.20);
 
-$output = '4 socket found';
+$output = 'Setting logfile path';
+$install->save($output);
+$install->delay(0.30);
+
+$output = 'Is writable?';
 $install->save($output);
 $install->delay(0.20);
 
-$output = '5 socket found';
+$output = 'Setting steps of process';
 $install->save($output);
-$install->delay(0.20);
+$install ->delay(0.30);
 
-
-$output = 'Injecting source code';
-$install->save($output);
-$install ->delay(3);
-
-$output = 'Closing connections';
+$output = 'Generation of PHP temp file';
 $install->save($output);
 $install ->delay(1);
 
-$output = 'Cleaning temp files';
+$output = 'Parsing and displaying progress bar';
 $install->save($output);
 $install ->delay(2);
 
-$output = 'Escaping from wife ;)';
+$output = 'Initialize delays';
 $install->save($output);
 $install ->delay(1);
 
-$output = 'Finished.';
+$output = 'Clean temporary files.';
 $install->save($output);
 $install ->delay(5);
 
