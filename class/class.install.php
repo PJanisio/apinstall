@@ -79,18 +79,23 @@ $lines = count(file("'.$this->path.'"));
 
 $width = round(($lines/'.$this->steps.')*100,1);
 ?>
+
 <div class="meter-wrap">
     <div class="meter-value" style="background-color: '.$this->colour.'; width: <?php echo $width; ?>%;">
         <div class="meter-text">
 		<?php echo $width; ?> %
         </div>
     </div>
-</div><br>
+</div>
+
 <?php
 
 $f = file("'.$this->path.'");
-echo $f[$lines - 1];
-
+?>
+<div class="output-text">
+<?php
+echo $f[$lines - 1]."
+</div>"
 ?>';
 
 	$fw = fwrite($fp, $data);  //save

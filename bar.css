@@ -1,6 +1,7 @@
 .meter-wrap{
+    margin: 0 auto 1em auto;
     position: relative;
-}
+	}
 
 .meter-wrap, .meter-value, .meter-text {
     /* The width and height of your image */
@@ -13,11 +14,15 @@
             
 .meter-text {
     position: absolute;
-    top:0; left:0;
-
-    padding-top: 5px;
-                
+    padding-top: 3px;
     color: #fff;
     text-align: center;
     width: 100%;
+}
+
+.output-text
+{
+	color: #bdbdbd;
+	text-align: center;
+
 }
