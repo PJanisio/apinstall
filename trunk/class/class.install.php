@@ -12,12 +12,15 @@ class Installer
 public $steps = 0;
 public $logData;
 public $path;
-public $logFileName;
+public $logFileName = NULL;
+public $printFileName = NULL;
 
 public function __construct($jquery = NULL)
 	{
 
 		 set_time_limit(0); //we need to do this in case of windows users and usleep function
+
+		 $this->printFileName = sha1($_SERVER['REMOTE_ADDR']).'.php';  //generate random digit php file
 		
 		
 		if(!isset($jquery)){
@@ -32,9 +35,10 @@ public function __construct($jquery = NULL)
 
 		//include javascript
 		echo "<script type='text/javascript'>
+		
 		var refreshId = setInterval(function()
 {
-     $('#apinstall').load('print.php');
+     $('#apinstall').load('".$this->printFileName."');
 }, 200);
 </script>";
 
@@ -84,7 +88,7 @@ public function setSteps($count)
 
 	
 	
-	$fp = fopen('print.php', "a+"); 
+	$fp = fopen($this->printFileName, "a+"); 
 	$data = '<?php
 
 
@@ -142,11 +146,19 @@ $this->steps++;
 
 	}
 
-	public function clearTemp()
+	public function clearTemp($delete = NULL)
 	{
-		//we neeed to clear temporary files made by our script
-	file_put_contents($this->path, ''); //or delete?
-	file_put_contents('print.php', '');
+		if($delete == 1)
+		{
+		unlink($this->path);
+		unlink($this->printFileName);
+		}
+		else
+		{
+		//clear temporary files made by our script
+	file_put_contents($this->path, ''); 
+	file_put_contents($this->printFileName, '');
+		}
 
 	}
 
