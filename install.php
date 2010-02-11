@@ -1,14 +1,15 @@
 <html>
 <head>
-<?php 
+<title>APINSTALL</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link href="bar.css" rel="stylesheet" type="text/css" />
+<?php
 require_once('class/class.install.php');
 
 $install = new Installer();
 ?>
+
 </head>
-<title>APINSTALL</title>
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link href="bar.css" rel="stylesheet" type="text/css" />
 <body>
 
 
@@ -25,7 +26,6 @@ $install = new Installer();
 
 if(isset($_POST['submit']))
 {
-
 
 $install->includeCSS();
 $install->setLogPath(''); //without trailing slash!
@@ -80,9 +80,10 @@ $output = 'Clean temporary files.';
 $install->save($output);
 $install ->delay(5);
 
-$install->clearTemp();
+$install->clearTemp(1);
 
 }
+
 ?>
 </body>
 </html>
