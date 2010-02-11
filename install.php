@@ -28,7 +28,7 @@ if(isset($_POST['submit']))
 
 
 $install->includeCSS();
-$install->setLogPath('/home/otsoft/public_html/blog/apinstall'); //without trailing slash!
+$install->setLogPath(''); //without trailing slash!
 $install->setSteps(12);
 $install->generate('#84AEBE');
 

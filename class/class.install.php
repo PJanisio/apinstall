@@ -1,7 +1,7 @@
 <?php
 
 /*
-Title: Apinstall 0.0.4
+Title: Apinstall 0.0.4a
 Author: Pawel 'Pavlus' Janisio
 Source: http://code.google.com/p/apinstall/
 License: GPLv3
