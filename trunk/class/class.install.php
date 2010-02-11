@@ -15,12 +15,14 @@ public $path;
 public $logFileName = NULL;
 public $printFileName = NULL;
 
+
 public function __construct($jquery = NULL)
 	{
 
 		 set_time_limit(0); //we need to do this in case of windows users and usleep function
-
-		 $this->printFileName = sha1($_SERVER['REMOTE_ADDR']).'.php';  //generate random digit php file
+		
+		 $this->printFileName = sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).'.php';  //generate random 
+		
 		
 		
 		if(!isset($jquery)){
@@ -53,7 +55,7 @@ public function includeCss()
 
 public function setLogPath($path)
 	{
-	$this->path = $path.'/'.$this->logFileName = sha1(date('Bs')).'.log';
+	$this->path = $path.'/'.$this->logFileName = sha1($_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']).'.log';
 	
 		return $this->path;
 
