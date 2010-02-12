@@ -1,7 +1,7 @@
 <?php
 
 /*
-Title: Apinstall 0.0.4a
+Title: Apinstall 0.0.4b
 Author: Pawel 'Pavlus' Janisio
 Source: http://code.google.com/p/apinstall/
 License: GPLv3
@@ -20,19 +20,18 @@ public function __construct($jquery = NULL)
 	{
 
 		 set_time_limit(0); //we need to do this in case of windows users and usleep function
-		
 		 $this->printFileName = sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).'.php';  //generate random 
-		
+		 echo '<link href="bar.css" rel="stylesheet" type="text/css" />'; //include css file
 		
 		
 		if(!isset($jquery)){
 		//include google jQuery libraries
 		echo '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>';
-		}
-		else
-		{
+			}
+			else
+			{
 			//echo 'Warning: jQuery libraries are not included!';
-		}
+			}
 		
 
 		//include javascript
@@ -47,14 +46,8 @@ public function __construct($jquery = NULL)
 
 </script>";
 
-
-
 	}
 
-public function includeCss()
-	{
-	echo '<link href="bar.css" rel="stylesheet" type="text/css" />';
-	}
 
 public function setLogPath($path)
 	{
