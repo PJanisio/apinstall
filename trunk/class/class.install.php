@@ -33,15 +33,18 @@ public function __construct($jquery = NULL)
 		{
 			//echo 'Warning: jQuery libraries are not included!';
 		}
-
+		
 
 		//include javascript
 		echo "<script type='text/javascript'>
-		
+	
 		var refreshId = setInterval(function()
 {
      $('#apinstall').load('".$this->printFileName."');
 }, 200);
+	
+
+
 </script>";
 
 
@@ -92,6 +95,7 @@ public function setSteps($count)
 	
 	$fp = fopen($this->printFileName, "a+"); 
 	$data = '<?php
+
 
 
 $steps = '.$this->steps.';
@@ -152,14 +156,14 @@ $this->steps++;
 	{
 		if($delete == 1)
 		{
-		unlink($this->path);
-		unlink($this->printFileName);
+		@unlink($this->path);
+		@unlink($this->printFileName);
 		}
 		else
 		{
 		//clear temporary files made by our script
-	file_put_contents($this->path, ''); 
-	file_put_contents($this->printFileName, '');
+	@file_put_contents($this->path, ''); 
+	@file_put_contents($this->printFileName, '');
 		}
 
 	}
