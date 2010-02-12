@@ -7,7 +7,6 @@ header("Expires: Mon, 26 Jul 2011 05:00:00 GMT");
 <head>
 <title>APINSTALL</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<link href="bar.css" rel="stylesheet" type="text/css" />
 <?php
 require_once('class/class.install.php');
 
@@ -32,7 +31,6 @@ $install = new Installer();
 if(isset($_POST['submit']))
 {
 
-$install->includeCSS();
 $install->setLogPath(''); //without trailing slash!
 $install->setSteps(12);
 $install->generate('#84AEBE');
