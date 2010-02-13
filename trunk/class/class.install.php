@@ -36,11 +36,13 @@ public function __construct($jquery = NULL)
 
 		//include javascript
 		echo "<script type='text/javascript'>
-	
-		var refreshId = setInterval(function()
-{
-     $('#apinstall').load('".$this->printFileName."');
-}, 200);
+
+$(document).ready(function() {
+ 	 $('#apinstall').load('".$this->printFileName."');
+   var refreshId = setInterval(function() {
+      $('#apinstall').load('".$this->printFileName."?randval='+ Math.random());
+   }, 200);
+});
 	
 
 
