@@ -48,6 +48,8 @@ $(document).ready(function() {
 
 </script>";
 
+
+
 	}
 
 
@@ -90,8 +92,6 @@ public function setSteps($count)
 	
 	$fp = fopen($this->printFileName, "a+"); 
 	$data = '<?php
-
-
 
 $steps = '.$this->steps.';
 $lines = count(file("'.$this->path.'"));
