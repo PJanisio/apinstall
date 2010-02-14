@@ -1,7 +1,7 @@
 <?php
 
 /*
-Title: Apinstall 0.0.4c
+Title: Apinstall 0.0.4d
 Author: Pawel 'Pavlus' Janisio
 Source: http://code.google.com/p/apinstall/
 License: GPLv3
@@ -42,13 +42,12 @@ public function __construct($jquery = NULL)
 		//include jQuery javascript
 		echo "<script type='text/javascript'>
 
-		$(document).ready(function() {
  	 $('#apinstall').load('".$this->printFileName."');
    var refreshId = setInterval(function() {
       $('#apinstall').load('".$this->printFileName."?randval='+ Math.random());
    }, 200);
 	
-});
+
 		</script>";
 
 	}
@@ -74,12 +73,31 @@ public function setSteps($count)
 		return $this->steps;
 	}
 
-	public function generate($colour = NULL)
+	public function parseForm($iframeName = NULL)
 	{
+
+		if(isset($iframeName))
+			$this->iframe = $iframeName;
+				else
+					$this->iframe = 'progressFrame';
+
+		echo '<center><form target="'.$this->iframe.'" method="post">
+				<input type="submit" name="submit" value="Submit"> 
+					</form></center>';
+
+	//load progressbar div and iframe needed by chrome and safari
+		echo '<div id="apinstall"><iframe style="display: none;" name="progressFrame"></iframe></div>';
+
+	}
+
+	public function parseTemp($colour = NULL)
+	{
+
 
 		if(isset($colour))
 			$this->colour = $colour;
 				else $this->colour = '#84AEBE'; 
+
 
 	
 	

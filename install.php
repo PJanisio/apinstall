@@ -1,7 +1,7 @@
 <?php
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
-	?>
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,30 +11,22 @@ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 require_once('class/class.install.php');
 
 $install = new Installer();
+
 ?>
 </head>
 <body>
 
 
-<center>
-<form action="install.php" method="post">
-<input type="submit" name="submit" value="Submit"> 
-</form>
-</center>
 
-	
-
-
-<?php
-
-echo '<div id="apinstall"></div>';
+<?php 
+$install->parseForm();
 
 if(isset($_POST['submit']))
 {
 
 $install->setLogPath(''); //without trailing slash!
 $install->setSteps(12);
-$install->generate('#84AEBE');
+$install->parseTemp('#84AEBE');
 
 $output = 'Submiting form';
 $install->save($output);
