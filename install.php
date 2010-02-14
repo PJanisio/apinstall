@@ -17,7 +17,7 @@ $install = new Installer();
 
 
 <center>
-<form method="post">
+<form action="install.php" method="post">
 <input type="submit" name="submit" value="Submit"> 
 </form>
 </center>
@@ -27,7 +27,7 @@ $install = new Installer();
 
 <?php
 
-echo '<div id="apinstall">Done</div>';
+echo '<div id="apinstall"></div>';
 
 if(isset($_POST['submit']))
 {
@@ -84,7 +84,7 @@ $output = 'Clean temporary files.';
 $install->save($output);
 $install ->delay(5);
 
-$install->clearTemp(1);
+$install->clearTemp(true); 
 
 }
 
