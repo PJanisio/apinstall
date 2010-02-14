@@ -22,10 +22,12 @@ $install = new Installer();
 </form>
 </center>
 
-	<div id="apinstall"></div>
+	
 
 
 <?php
+
+echo '<div id="apinstall">Done</div>';
 
 if(isset($_POST['submit']))
 {
