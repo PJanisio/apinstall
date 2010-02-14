@@ -1,7 +1,7 @@
 <?php
 
 /*
-Title: Apinstall 0.0.4b
+Title: Apinstall 0.0.4c
 Author: Pawel 'Pavlus' Janisio
 Source: http://code.google.com/p/apinstall/
 License: GPLv3
@@ -9,48 +9,47 @@ License: GPLv3
 
 class Installer
 {
+
 public $steps = 0;
-public $logData;
-public $path;
-public $logFileName = NULL;
-public $printFileName = NULL;
+public $logData = NULL;
+public $path = '';
+public $logFileName = '';
+public $printFileName = '';
 
 
 public function __construct($jquery = NULL)
 	{
+	//we need to do this in case of windows users and usleep function
+	set_time_limit(0);
+	
+	//generate random number printfile name
+	$this->printFileName = sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).'.php';
 
-		 set_time_limit(0); //we need to do this in case of windows users and usleep function
-		 $this->printFileName = sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).'.php';  //generate random 
-		 echo '<link href="bar.css" rel="stylesheet" type="text/css" />'; //include css file
+	//include css file
+	echo '<link href="bar.css" rel="stylesheet" type="text/css" />'; 
 		
-		
-		if(!isset($jquery)){
 		//include google jQuery libraries
+		if(!isset($jquery)){
 		echo '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>';
 			}
-			else
+			else if ($jquery == TRUE)
 			{
 			//echo 'Warning: jQuery libraries are not included!';
 			}
 		
+		
 
-		//include javascript
+		//include jQuery javascript
 		echo "<script type='text/javascript'>
 
-$(document).ready(function() {
-	
+		$(document).ready(function() {
  	 $('#apinstall').load('".$this->printFileName."');
    var refreshId = setInterval(function() {
       $('#apinstall').load('".$this->printFileName."?randval='+ Math.random());
    }, 200);
 	
 });
-	
-
-
-</script>";
-
-
+		</script>";
 
 	}
 
@@ -58,16 +57,8 @@ $(document).ready(function() {
 public function setLogPath($path)
 	{
 	$this->path = $path.'/'.$this->logFileName = sha1($_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']).'.log';
-	
-		return $this->path;
-
-
-	}
-
-	public function showPath()
-	{
-
 	return $this->path;
+
 
 	}
 
@@ -143,28 +134,43 @@ public function save($output)
 $this->logData = $output;
 
 $fp = fopen($this->path, "a+"); 
-$fw = fwrite($fp, $this->logData."\r\n");  //save
-fclose($fp);
-$this->steps++;
+	$fw = fwrite($fp, $this->logData."\r\n");  //save
+		fclose($fp);
+			$this->steps++;
 
 	}
 
 	public function clearTemp($delete = NULL)
 	{
-		if($delete == 1)
+		if($delete == TRUE)
 		{
-		@unlink($this->path);
-		@unlink($this->printFileName);
+			//delete files
+		unlink($this->path);
+		unlink($this->printFileName);
 		}
 		else
 		{
 		//clear temporary files made by our script
-	@file_put_contents($this->path, ''); 
-	@file_put_contents($this->printFileName, '');
+		file_put_contents($this->path, ''); 
+		file_put_contents($this->printFileName, '');
 		}
 
 	}
 
 
+	public function __destruct()
+	{
+		//unset all variables defined by class
+			if(isset($this->logData))
+		{
+			unset($this->steps);
+			unset($this->logData);
+			unset($this->path);
+			unset($this->logFileName);
+			unset($this->printFileName);
+		}
 
+
+	}
+	
 }
