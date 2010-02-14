@@ -38,10 +38,12 @@ public function __construct($jquery = NULL)
 		echo "<script type='text/javascript'>
 
 $(document).ready(function() {
+	
  	 $('#apinstall').load('".$this->printFileName."');
    var refreshId = setInterval(function() {
       $('#apinstall').load('".$this->printFileName."?randval='+ Math.random());
    }, 200);
+	
 });
 	
 
