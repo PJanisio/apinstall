@@ -1,7 +1,7 @@
 <?php
 
 /*
-Title: Apinstall 0.0.4d
+Title: Apinstall 0.0.5
 Author: Pawel 'Pavlus' Janisio
 Source: http://code.google.com/p/apinstall/
 License: GPLv3
@@ -42,11 +42,21 @@ public function __construct($jquery = NULL)
 		//include jQuery javascript
 		echo "<script type='text/javascript'>
 
- 	 $('#apinstall').load('".$this->printFileName."');
-   var refreshId = setInterval(function() {
+		
+
+		function refresh(){
+		 var intID = setInterval(function() {
       $('#apinstall').load('".$this->printFileName."?randval='+ Math.random());
-   }, 200);
-	
+			}, 200);
+			$('#b').fadeOut('slow');
+		}
+
+			$(document).ready(function() {
+  $('#form').submit(function() {
+    refresh();
+  });
+ 
+});
 
 		</script>";
 
@@ -81,22 +91,28 @@ public function setSteps($count)
 				else
 					$this->iframe = 'progressFrame';
 
-		echo '<center><form target="'.$this->iframe.'" method="post">
-				<input type="submit" name="submit" value="Submit"> 
-					</form></center>';
 
 	//load progressbar div and iframe needed by chrome and safari
-		echo '<div id="apinstall"><iframe style="display: none;" name="progressFrame"></iframe></div>';
+	echo '<iframe style="display: none;" name="progressFrame"></iframe>';
+		echo '<div id="apinstall"></div>';
+
+		echo '<center><form id="form" action ="" target="'.$this->iframe.'" method="post">
+					<input id="b" type="submit" name="submit" value="Show me how it works!"> 
+					</form></center>';
 
 	}
 
-	public function parseTemp($colour = NULL)
+	public function parseBar($barColour = NULL, $textColour = NULL)
 	{
 
 
-		if(isset($colour))
-			$this->colour = $colour;
+		if(isset($barColour))
+			$this->colour = $barColour;
 				else $this->colour = '#84AEBE'; 
+
+				if(isset($textColour))
+					$this->colour = $textColour;
+						else $this->colour = '#84AEBE';
 
 
 	
@@ -122,7 +138,7 @@ $width = round(($lines/'.$this->steps.')*100,1);
 
 $f = file("'.$this->path.'");
 ?>
-<div class="output-text">
+<div class="output-text" style="color: '.$this->colour.'">
 <?php
 echo $f[$lines - 1]."
 </div>"
@@ -173,14 +189,17 @@ $fp = fopen($this->path, "a+");
 		file_put_contents($this->printFileName, '');
 		}
 
+
 	}
 
 
 	public function __destruct()
 	{
+		
 		//unset all variables defined by class
 			if(isset($this->logData))
 		{
+				
 			unset($this->steps);
 			unset($this->logData);
 			unset($this->path);

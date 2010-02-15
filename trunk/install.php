@@ -17,7 +17,6 @@ $install = new Installer();
 <body>
 
 
-
 <?php 
 $install->parseForm();
 
@@ -25,60 +24,98 @@ if(isset($_POST['submit']))
 {
 
 $install->setLogPath(''); //without trailing slash!
-$install->setSteps(12);
-$install->parseTemp('#84AEBE');
+$install->setSteps(21);
+$install->parseBar('#E54000', '#E54000');
 
-$output = 'Submiting form';
+$output = 'Setting class variables';
 $install->save($output);
-$install->delay(2);
+$install->delay(0.5);
 
-$output = 'Including Apinstall class';
+$output = 'Disabling time limit';
 $install->save($output);
-$install->delay(1);
+$install->delay(0.5);
 
-$output = 'Initializing Apinstall class';
+$output = 'Generating random numbers';
 $install->save($output);
 $install->delay(1);
 
 $output = 'Including CSS stylesheet';
 $install->save($output);
+$install->delay(0.5);
+
+$output = 'Including jQuery javascript from Googleapis.com';
+$install->save($output);
 $install->delay(1);
 
 $output = 'Including jQuery javascript';
 $install->save($output);
-$install->delay(1);
+$install->delay(0.5);
 
-$output = 'Setting logfile path';
-$install->save($output);
-$install->delay(1);
-
-$output = 'Is writable?';
+$output = 'Form generation';
 $install->save($output);
 $install->delay(0.6);
 
-$output = 'Setting steps of process';
+$output = 'Setting log path';
+$install->save($output);
+$install ->delay(0.4);
+
+$output = 'Defining number of steps';
+$install->save($output);
+$install ->delay(0.8);
+
+$output = 'Setting progress bar variables';
 $install->save($output);
 $install ->delay(1);
 
-$output = 'Generation of PHP temp file';
+$output = 'Form submiting';
+$install->save($output);
+$install->delay(0.9);
+
+$output = 'Creating temporary PHP file';
 $install->save($output);
 $install ->delay(1);
 
-$output = 'Parsing and displaying progress bar';
+$output = 'Animate progress bar';
 $install->save($output);
-$install ->delay(2);
+$install ->delay(0.7);
 
-$output = 'Initialize delays';
+$output = 'Save output to log file';
 $install->save($output);
-$install ->delay(1);
+$install ->delay(0.7);
 
-$output = 'Clean temporary files.';
+$output = 'Initialize delay';
 $install->save($output);
-$install ->delay(5);
+$install ->delay(0.7);
+
+$output = 'Animate progress bar';
+$install->save($output);
+$install ->delay(0.8);
+
+$output = 'Animate progress bar';
+$install->save($output);
+$install ->delay(0.5);
+
+$output = 'Animate progress bar';
+$install->save($output);
+$install ->delay(0.4);
+
+$output = 'Animate progress bar';
+$install->save($output);
+$install ->delay(0.2);
+
+$output = 'Clear temporary files';
+$install->save($output);
+$install ->delay(0.5);
+
+$output = 'Finish loading';
+$install->save($output);
+$install ->delay(0.8);
 
 $install->clearTemp(true); 
 
+
 }
+
 
 ?>
 </body>
