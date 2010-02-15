@@ -18,11 +18,15 @@ $install = new Installer();
 ?>
 </head>
 <body>
-
-
+<!-- Rememer to add form id="apiform" and target="progressFrame" to make script working -->
+<center><form id="apiform" target="progressFrame" method="post">
+					<input id="apisubmit" type="submit" name="submit" value="Show me how it works!"> 
+					</form></center>
 <?php 
+
+
 //load form, define progress bar colours and make a placeholder for it
-$install->parseForm();
+$install->placeholder();
 
 if(isset($_POST['submit']))
 {
