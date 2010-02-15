@@ -8,8 +8,11 @@ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 <title>APINSTALL</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <?php
+
+//include class
 require_once('class/class.install.php');
 
+//initialize class
 $install = new Installer();
 
 ?>
@@ -18,15 +21,22 @@ $install = new Installer();
 
 
 <?php 
+//load form, define progress bar colours and make a placeholder for it
 $install->parseForm();
 
 if(isset($_POST['submit']))
 {
-
+//set path to temp files f.e /home/otsoft/public_html/apinstall
 $install->setLogPath(''); //without trailing slash!
-$install->setSteps(21);
-$install->parseBar('#E54000', '#E54000');
 
+//set number of process steps
+$install->setSteps(21);
+
+//define colours
+$install->defineBar('#E54000', '#E54000');
+
+
+//define your process output
 $output = 'Setting class variables';
 $install->save($output);
 $install->delay(0.5);
@@ -67,7 +77,7 @@ $output = 'Setting progress bar variables';
 $install->save($output);
 $install ->delay(1);
 
-$output = 'Form submiting';
+$output = 'Form submition';
 $install->save($output);
 $install->delay(0.9);
 
@@ -110,6 +120,8 @@ $install ->delay(0.5);
 $output = 'Finish loading';
 $install->save($output);
 $install ->delay(0.8);
+
+//clear temporary data (true == deleting files, nothing == clearing files)
 
 $install->clearTemp(true); 
 

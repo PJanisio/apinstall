@@ -102,7 +102,7 @@ public function setSteps($count)
 
 	}
 
-	public function parseBar($barColour = NULL, $textColour = NULL)
+	public function defineBar($barColour = NULL, $textColour = NULL)
 	{
 
 
