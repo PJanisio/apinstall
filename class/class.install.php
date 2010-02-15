@@ -1,7 +1,7 @@
 <?php
 
 /*
-Title: Apinstall 0.0.5
+Title: Apinstall 0.0.6
 Author: Pawel 'Pavlus' Janisio
 Source: http://code.google.com/p/apinstall/
 License: GPLv3
@@ -40,27 +40,43 @@ public function __construct($jquery = NULL)
 		
 
 		//include jQuery javascript
+		
 		echo "<script type='text/javascript'>
 
-		
 
 		function refresh(){
-		 var intID = setInterval(function() {
-      $('#apinstall').load('".$this->printFileName."?randval='+ Math.random());
-			}, 200);
-			$('#b').fadeOut('slow');
-		}
+		$('#apisubmit').fadeOut('slow');
+		var intID = setInterval(function() {
 
+		$.ajax({
+		type: 'GET',
+		url: '".$this->printFileName."',
+		cache: false,
+		success: function(){
+
+      $('#apinstall').load('".$this->printFileName."?randval='+ Math.random());
+	
+							},
+	error : function (xhr, d, e) {
+      if (xhr.status == 404) {
+        clearInterval(intID);
+		$('#apinstall').fadeOut('slow');
+      }
+    }
+ });
+
+ 	}, 200);
+		}
 			$(document).ready(function() {
-  $('#form').submit(function() {
+  $('#apiform').submit(function() {
     refresh();
   });
  
 });
 
 		</script>";
-
-	}
+		}
+	
 
 
 public function setLogPath($path)
@@ -83,7 +99,7 @@ public function setSteps($count)
 		return $this->steps;
 	}
 
-	public function parseForm($iframeName = NULL)
+	public function placeholder($iframeName = NULL)
 	{
 
 		if(isset($iframeName))
@@ -93,12 +109,9 @@ public function setSteps($count)
 
 
 	//load progressbar div and iframe needed by chrome and safari
-	echo '<iframe style="display: none;" name="progressFrame"></iframe>';
+	echo '<iframe style="display: none;" name="'.$this->iframe.'"></iframe>';
 		echo '<div id="apinstall"></div>';
 
-		echo '<center><form id="form" action ="" target="'.$this->iframe.'" method="post">
-					<input id="b" type="submit" name="submit" value="Show me how it works!"> 
-					</form></center>';
 
 	}
 
