@@ -25,7 +25,7 @@ $install = new Installer();
 <?php 
 
 
-//load form, define progress bar colours and make a placeholder for it
+//load form, define progress bar colours
 $install->placeholder();
 
 if(isset($_POST['submit']))
