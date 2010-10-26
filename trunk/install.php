@@ -30,7 +30,7 @@ $install->placeholder();
 
 if(isset($_POST['submit']))
 {
-//set path to temp files f.e /home/otsoft/public_html/apinstall
+//set path to temp files f.e /home/domain/public_html/apinstall
 $install->setLogPath(''); //without trailing slash!
 
 //set number of process steps
@@ -127,7 +127,7 @@ $install ->delay(0.8);
 
 //clear temporary data (true == deleting files, nothing == clearing files)
 
-$install->clearTemp(true); 
+$install->clearTemp(); 
 
 
 }

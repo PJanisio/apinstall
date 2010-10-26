@@ -30,7 +30,7 @@ public function __construct($jquery = NULL)
 		
 		//include google jQuery libraries
 		if(!isset($jquery)){
-		echo '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.js"></script>';
+		echo '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.js"></script>';
 			}
 			else if ($jquery == TRUE)
 			{
@@ -65,7 +65,7 @@ public function __construct($jquery = NULL)
     }
  });
 
- 	}, 200);
+ 	}, 200);     
 		}
 			$(document).ready(function() {
   $('#apiform').submit(function() {
@@ -186,21 +186,25 @@ $fp = fopen($this->path, "a+");
 			$this->steps++;
 
 	}
+    
+    
 
-	public function clearTemp($delete = NULL)
+	public function clearTemp($leave = NULL)
 	{
-		if($delete == TRUE)
-		{
-			//delete files
-		unlink($this->path);
-		unlink($this->printFileName);
+		if($leave = TRUE)
+		{           
+            //clear temporary files made by our script
+        file_put_contents($this->path, ''); 
+        file_put_contents($this->printFileName, '');
+			
 		}
 		else
 		{
-		//clear temporary files made by our script
-		file_put_contents($this->path, ''); 
-		file_put_contents($this->printFileName, '');
+		    //delete temporary files
+        unlink($this->path);
+        unlink($this->printFileName);
 		}
+            
 
 
 	}
