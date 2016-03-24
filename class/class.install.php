@@ -1,46 +1,56 @@
 <?php
-
 /*
 Title: Apinstall 0.0.6
 Author: Pawel 'Pavlus' Janisio
 Source: http://code.google.com/p/apinstall/
 License: GPLv3
 */
-
 class Installer
-{
 
-public $steps = 0;
-public $logData = NULL;
-public $path = '';
-public $logFileName = '';
-public $printFileName = '';
-
-
-public function __construct($jquery = NULL)
 	{
-	//we need to do this in case of windows users and usleep function
-	set_time_limit(0);
-	
-	//generate random number printfile name
-	$this->printFileName = sha1($_SERVER['REMOTE_ADDR'].$_SERVER['HTTP_USER_AGENT']).'.php';
+	public $steps = 0;
 
-	//include css file
-	echo '<link href="bar.css" rel="stylesheet" type="text/css" />'; 
-		
-		//include google jQuery libraries
-		if(!isset($jquery)){
-		echo '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.js"></script>';
-			}
-			else if ($jquery == TRUE)
+	public $logData = NULL;
+
+	public $path = '';
+
+	public $logFileName = '';
+
+	public $printFileName = '';
+
+	public
+
+	function __construct($jquery = NULL)
+		{
+
+		// we need to do this in case of windows users and usleep function
+
+		set_time_limit(0);
+
+		// generate random number printfile name
+
+		$this->printFileName = sha1($_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']) . '.php';
+
+		// include css file
+
+		echo '<link href="bar.css" rel="stylesheet" type="text/css" />';
+
+		// include google jQuery libraries
+
+		if (!isset($jquery))
 			{
-			//echo 'Warning: jQuery libraries are not included!';
+			echo '<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.js"></script>';
 			}
-		
-		
+		  else
+		if ($jquery == TRUE)
+			{
 
-		//include jQuery javascript
-		
+			// echo 'Warning: jQuery libraries are not included!';
+
+			}
+
+		// include jQuery javascript
+
 		echo "<script type='text/javascript'>
 
 
@@ -50,11 +60,11 @@ public function __construct($jquery = NULL)
 
 		$.ajax({
 		type: 'GET',
-		url: '".$this->printFileName."',
+		url: '" . $this->printFileName . "',
 		cache: false,
 		success: function(){
 
-      $('#apinstall').load('".$this->printFileName."?randval='+ Math.random());
+      $('#apinstall').load('" . $this->printFileName . "?randval='+ Math.random());
 	
 							},
 	error : function (xhr, d, e) {
@@ -76,71 +86,62 @@ public function __construct($jquery = NULL)
 
 		</script>";
 		}
-	
 
+	public
 
-public function setLogPath($path)
-	{
-	$this->path = $path.'/'.$this->logFileName = sha1($_SERVER['HTTP_USER_AGENT'].$_SERVER['REMOTE_ADDR']).'.log';
-	return $this->path;
+	function setLogPath($path)
+		{
+		$this->path = $path . '/' . $this->logFileName = sha1($_SERVER['HTTP_USER_AGENT'] . $_SERVER['REMOTE_ADDR']) . '.log';
+		return $this->path;
+		}
 
+	public
 
-	}
-
-public function setSteps($count)
-	{
-	$this->steps = $count;
-	return $this->steps;
-	}
-
-	public function showSteps()
-	{
-
+	function setSteps($count)
+		{
+		$this->steps = $count;
 		return $this->steps;
-	}
+		}
 
-	public function placeholder($iframeName = NULL)
-	{
+	public
 
-		if(isset($iframeName))
-			$this->iframe = $iframeName;
-				else
-					$this->iframe = 'progressFrame';
+	function showSteps()
+		{
+		return $this->steps;
+		}
 
+	public
 
-	//load progressbar div and iframe needed by chrome and safari
-	echo '<iframe style="display: none;" name="'.$this->iframe.'"></iframe>';
+	function placeholder($iframeName = NULL)
+		{
+		if (isset($iframeName)) $this->iframe = $iframeName;
+		  else $this->iframe = 'progressFrame';
+
+		// load progressbar div and iframe needed by chrome and safari
+
+		echo '<iframe style="display: none;" name="' . $this->iframe . '"></iframe>';
 		echo '<div id="apinstall"></div>';
+		}
 
+	public
 
-	}
+	function defineBar($barColour = NULL, $textColour = NULL)
+		{
+		if (isset($barColour)) $this->colour = $barColour;
+		  else $this->colour = '#84AEBE';
+		if (isset($textColour)) $this->colour = $textColour;
+		  else $this->colour = '#84AEBE';
+		$fp = fopen($this->printFileName, "a+");
+		$data = '<?php
 
-	public function defineBar($barColour = NULL, $textColour = NULL)
-	{
+$steps = ' . $this->steps . ';
+$lines = count(file("' . $this->path . '"));
 
-
-		if(isset($barColour))
-			$this->colour = $barColour;
-				else $this->colour = '#84AEBE'; 
-
-				if(isset($textColour))
-					$this->colour = $textColour;
-						else $this->colour = '#84AEBE';
-
-
-	
-	
-	$fp = fopen($this->printFileName, "a+"); 
-	$data = '<?php
-
-$steps = '.$this->steps.';
-$lines = count(file("'.$this->path.'"));
-
-$width = round(($lines/'.$this->steps.')*100,1);
+$width = round(($lines/' . $this->steps . ')*100,1);
 ?>
 
 <div class="meter-wrap">
-    <div class="meter-value" style="background-color: '.$this->colour.'; width: <?php echo $width; ?>%;">
+    <div class="meter-value" style="background-color: ' . $this->colour . '; width: <?php echo $width; ?>%;">
         <div class="meter-text">
 		<?php echo $width; ?> %
         </div>
@@ -149,82 +150,73 @@ $width = round(($lines/'.$this->steps.')*100,1);
 
 <?php
 
-$f = file("'.$this->path.'");
+$f = file("' . $this->path . '");
 ?>
-<div class="output-text" style="color: '.$this->colour.'">
+<div class="output-text" style="color: ' . $this->colour . '">
 <?php
 echo $f[$lines - 1]."
 </div>"
 ?>';
-
-	$fw = fwrite($fp, $data);  //save
-	fclose($fp);
-
-
-	}
-
-public function delay($sec)
-	{
-	$this->sleepTime = abs($sec);
-
-    if ($this->sleepTime < 1)
-       return usleep($this->sleepTime*1000000); 
-    else
-       return sleep($this->sleepTime);
-
-	}
-
-
-
-public function save($output)
-	{
-$this->logData = $output;
-
-$fp = fopen($this->path, "a+"); 
-	$fw = fwrite($fp, $this->logData."\r\n");  //save
+		$fw = fwrite($fp, $data); //save
 		fclose($fp);
-			$this->steps++;
-
-	}
-    
-    
-
-	public function clearTemp($leave = NULL)
-	{
-		if($leave = TRUE)
-		{           
-            //clear temporary files made by our script
-        file_put_contents($this->path, ''); 
-        file_put_contents($this->printFileName, '');
-			
 		}
-		else
+
+	public
+
+	function delay($sec)
 		{
-		    //delete temporary files
-        unlink($this->path);
-        unlink($this->printFileName);
+		$this->sleepTime = abs($sec);
+		if ($this->sleepTime < 1) return usleep($this->sleepTime * 1000000);
+		  else return sleep($this->sleepTime);
 		}
-            
 
+	public
 
-	}
-
-
-	public function __destruct()
-	{
-		
-		//unset all variables defined by class
-			if(isset($this->logData))
+	function save($output)
 		{
-				
+		$this->logData = $output;
+		$fp = fopen($this->path, "a+");
+		$fw = fwrite($fp, $this->logData . "\r\n"); //save
+		fclose($fp);
+		$this->steps++;
+		}
+
+	public
+
+	function clearTemp($leave = NULL)
+		{
+		if ($leave = TRUE)
+			{
+
+			// clear temporary files made by our script
+
+			file_put_contents($this->path, '');
+			file_put_contents($this->printFileName, '');
+			}
+		  else
+			{
+
+			// delete temporary files
+
+			unlink($this->path);
+			unlink($this->printFileName);
+			}
+		}
+
+	public
+
+	function __destruct()
+		{
+
+		// unset all variables defined by class
+
+		if (isset($this->logData))
+			{
 			unset($this->steps);
 			unset($this->logData);
 			unset($this->path);
 			unset($this->logFileName);
 			unset($this->printFileName);
+			}
 		}
-
-
 	}
-	
-}
